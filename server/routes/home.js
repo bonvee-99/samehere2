@@ -11,11 +11,25 @@ router.get("/", authorize, async (req, res) => {
   try {
     // queries all posts and the given user information
     const userPosts = await pool.query(
-      "SELECT u.user_name, u.user_email, p.post_id, p.description, p.post_time FROM users AS u LEFT JOIN posts as p ON u.user_id = p.user_id OR u.user_id != p.user_id where u.user_id = $1 ORDER BY p.post_time",
+      "SELECT u.user_name, u.user_email, p.post_id, p.description, p.post_time FROM users AS u LEFT JOIN posts as p ON u.user_id = p.user_id OR u.user_id != p.user_id where u.user_id = $1 ORDER BY p.post_time DESC",
       [req.user.id]
     );
 
     res.json(userPosts.rows);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json("Server Error!");
+  }
+});
+
+// Gets all posts (do noot need to be logged in). Ordered by newest to oldest (PUBLIC)
+router.get("/posts", async (req, res) => {
+  try {
+    const posts = await pool.query(
+      "SELECT * FROM posts ORDER BY post_time DESC"
+    );
+
+    res.json(posts.rows);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");
@@ -78,7 +92,7 @@ router.get("/comments/post/:id", authorize, async (req, res) => {
   try {
     const { id } = req.params; // post id
     const comments = await pool.query(
-      "SELECT * FROM comments where post_id = $1 ORDER BY post_time",
+      "SELECT * FROM comments where post_id = $1 ORDER BY post_time DESC",
       [id]
     );
 

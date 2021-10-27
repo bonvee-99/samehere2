@@ -80,7 +80,7 @@ router.post("/login", validateInfo, async (req, res) => {
 // check if authorized by looking at jwt token in header
 router.get("/is-verified", authorize, async (req, res) => {
   try {
-    // if verified by authorize will reach here
+    // if verified by authorize return true
     res.json(true);
   } catch (error) {
     console.error(error.message);
