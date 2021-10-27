@@ -4,16 +4,18 @@ const pool = require("../db");
 
 // -----> POSTS -----> //
 
+// must check if user exists still??? ... if they have token and try to make requests then it will bug out... add later
+
 // Gets all user info - name, email and their posts if they exist as well as anyone else's posts. Ordered by post time
 router.get("/", authorize, async (req, res) => {
   try {
     // queries all posts and the given user information
-    const user = await pool.query(
+    const userPosts = await pool.query(
       "SELECT u.user_name, u.user_email, p.post_id, p.description, p.post_time FROM users AS u LEFT JOIN posts as p ON u.user_id = p.user_id OR u.user_id != p.user_id where u.user_id = $1 ORDER BY p.post_time",
       [req.user.id]
     );
 
-    res.json(user.rows);
+    res.json(userPosts.rows);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");
@@ -58,11 +60,11 @@ router.put("/posts/:id", authorize, async (req, res) => {
     const { id } = req.params;
     const { description } = req.body;
     const updatePost = await pool.query(
-      "UPDATE posts SET description = $1, timestamp = LOCALTIMESTAMP WHERE todo_id = $2 AND user_id = $3 RETURNING *",
+      "UPDATE posts SET description = $1, post_time = LOCALTIMESTAMP WHERE post_id = $2 AND user_id = $3 RETURNING *",
       [description, id, req.user.id]
     );
 
-    res.json(updatePost.rows);
+    res.json(updatePost.rows[0]);
   } catch (error) {
     console.error(error.message);
   }
@@ -71,21 +73,27 @@ router.put("/posts/:id", authorize, async (req, res) => {
 // -----> COMMENTS -----> //
 
 // get all comments on a given post and ordered by posttime
-router.get("/comments", authorize, async (req, res) => {
+router.get("/comments/post/:id", authorize, async (req, res) => {
   try {
-    // left join of users on posts and their comments??? where comments.post_id = $1...
+    const { id } = req.params; // post id
+    const comments = await pool.query(
+      "SELECT * FROM comments where post_id = $1 ORDER BY post_time",
+      [id]
+    );
+
+    res.json(comments.rows);
   } catch (error) {
     console.error(error.message);
   }
 });
 
-// add a comment
-router.post("/comments/:id", authorize, async (req, res) => {
+// add a comment to a given post
+router.post("/comments/post/:id", authorize, async (req, res) => {
   try {
     const { id } = req.params; // post id
     const { description } = req.body;
     const newComment = await pool.query(
-      "INSERT INTO comments (user_id, post_id, description) RETURNING *",
+      "INSERT INTO comments (user_id, post_id, description) VALUES ($1, $2, $3) RETURNING *",
       [req.user.id, id, description]
     );
 
@@ -100,11 +108,11 @@ router.delete("/comments/:id", authorize, async (req, res) => {
   try {
     const { id } = req.params; // comment id
     const deleteComment = await pool.query(
-      "DELETE FROM comments WHERE comment_id = $1 AND user_id = $2 RETURNING *",
+      "DELETE FROM comments WHERE comm_id = $1 AND user_id = $2 RETURNING *",
       [id, req.user.id]
     );
 
-    res.json(deleteComment.rows);
+    res.json(deleteComment.rows[0]);
   } catch (error) {
     console.error(error.message);
   }
@@ -116,11 +124,11 @@ router.put("/comments/:id", authorize, async (req, res) => {
     const { id } = req.params; // comment id
     const { description } = req.body;
     const updateComment = await pool.query(
-      "UPDATE comments SET description = $1 WHERE comment_id = $2 AND user_id = $3 RETURNING *",
+      "UPDATE comments SET description = $1 WHERE comm_id = $2 AND user_id = $3 RETURNING *",
       [description, id, req.user.id]
     );
 
-    res.json(updateComment.rows);
+    res.json(updateComment.rows[0]);
   } catch (error) {
     console.error(error.message);
   }

@@ -91,12 +91,14 @@ router.get("/is-verified", authorize, async (req, res) => {
 // deletes user and all corresponding posts (and comments on them) as well as their comments
 router.delete("/user", authorize, async (req, res) => {
   try {
+    console.log(req.user.id);
     const deleteUser = await pool.query(
       "DELETE FROM users WHERE user_id = $1 RETURNING *",
       [req.user.id]
     );
 
-    console.log(deleteUser);
+    console.log(deleteUser.rows[0]);
+    res.json(deleteUser.rows[0]);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");

@@ -34,12 +34,7 @@ CREATE TABLE comments (
 );
 
 
--- CREATE TABLE follows (
--- 	user_id UUID NOT NULL,
--- 	follow_id UUID NOT NULL,
--- 	FOREIGN KEY (user_id) REFERENCES users(user_id),
--- 	FOREIGN KEY (follow_id) REFERENCES users(user_id)
--- );
+-- can get rid of foreign key at bottom because references implicitly says its a foreign key???
 
 
 -- situation: test has 1 post and has 2 comments (one from test and one from don). Don follows test. Don sees his own post and also tests post and comments on that post
