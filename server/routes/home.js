@@ -67,6 +67,7 @@ router.put("/posts/:id", authorize, async (req, res) => {
     res.json(updatePost.rows[0]);
   } catch (error) {
     console.error(error.message);
+    res.status(500).json("Server Error!");
   }
 });
 
@@ -84,6 +85,7 @@ router.get("/comments/post/:id", authorize, async (req, res) => {
     res.json(comments.rows);
   } catch (error) {
     console.error(error.message);
+    res.status(500).json("Server Error!");
   }
 });
 
@@ -100,6 +102,7 @@ router.post("/comments/post/:id", authorize, async (req, res) => {
     res.json(newComment.rows[0]);
   } catch (error) {
     console.error(error.message);
+    res.status(500).json("Server Error!");
   }
 });
 
@@ -115,6 +118,7 @@ router.delete("/comments/:id", authorize, async (req, res) => {
     res.json(deleteComment.rows[0]);
   } catch (error) {
     console.error(error.message);
+    res.status(500).json("Server Error!");
   }
 });
 
@@ -131,6 +135,7 @@ router.put("/comments/:id", authorize, async (req, res) => {
     res.json(updateComment.rows[0]);
   } catch (error) {
     console.error(error.message);
+    res.status(500).json("Server Error!");
   }
 });
 
