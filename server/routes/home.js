@@ -88,7 +88,7 @@ router.put("/posts/:id", authorize, async (req, res) => {
 // -----> COMMENTS -----> //
 
 // get all comments on a given post and ordered by posttime
-router.get("/comments/post/:id", authorize, async (req, res) => {
+router.get("/comments/post/:id", async (req, res) => {
   try {
     const { id } = req.params; // post id
     const comments = await pool.query(
