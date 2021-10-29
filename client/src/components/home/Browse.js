@@ -1,7 +1,7 @@
 import { Button, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
-const Home = () => {
+const Browse = () => {
   const [posts, setPosts] = useState([]);
   const [change, setChange] = useState(false);
 
@@ -24,4 +24,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Browse;

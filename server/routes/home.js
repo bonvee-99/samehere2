@@ -61,7 +61,10 @@ router.delete("/posts/:id", authorize, async (req, res) => {
       [id, req.user.id]
     );
 
-    res.json(deletePost.rows);
+    if (deletePost.rows.length === 0) {
+      res.json("This post is not yours");
+    }
+    res.json("Success!");
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");

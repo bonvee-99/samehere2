@@ -36,7 +36,6 @@ function App() {
 
   useEffect(() => {
     isAuth();
-    setIsAuthenticated(false);
   }); // we want this to happen on load as well as anytime isAuthenticated changes
 
   return (

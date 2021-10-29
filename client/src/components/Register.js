@@ -8,7 +8,7 @@ toast.configure();
 
 const Register = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
-    email: "hi",
+    email: "",
     password: "",
     name: "",
   });
