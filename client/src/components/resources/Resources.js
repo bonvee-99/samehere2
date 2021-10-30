@@ -1,5 +1,5 @@
 const Resources = () => {
-  return <div>Resources</div>;
+  return <div>Resources Page</div>;
 };
 
 export default Resources;
