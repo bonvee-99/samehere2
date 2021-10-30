@@ -11,7 +11,7 @@ router.get("/", authorize, async (req, res) => {
   try {
     // queries all posts and the given user information
     const userPosts = await pool.query(
-      "SELECT u.user_name, u.user_email, p.post_id, p.description, p.post_time FROM users AS u LEFT JOIN posts as p ON u.user_id = p.user_id OR u.user_id != p.user_id where u.user_id = $1 ORDER BY p.post_time DESC",
+      "SELECT u.user_name, u.user_email, p.post_id, p.description, p.post_time, p.user_id AS author FROM users AS u LEFT JOIN posts as p ON u.user_id = p.user_id OR u.user_id != p.user_id WHERE u.user_id = $1 ORDER BY p.post_time DESC",
       [req.user.id]
     );
 
@@ -62,7 +62,7 @@ router.delete("/posts/:id", authorize, async (req, res) => {
     );
 
     if (deletePost.rows.length === 0) {
-      res.json("This post is not yours");
+      return res.json("This post is not yours");
     }
     res.json("Success!");
   } catch (error) {
@@ -81,7 +81,10 @@ router.put("/posts/:id", authorize, async (req, res) => {
       [description, id, req.user.id]
     );
 
-    res.json(updatePost.rows[0]);
+    if (updatePost.rows.length === 0) {
+      return res.json("This post is not yours");
+    }
+    res.json("Success!");
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");

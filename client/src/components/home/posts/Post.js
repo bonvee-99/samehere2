@@ -54,7 +54,15 @@ const Post = ({ post, setChange }) => {
           body: JSON.stringify(body),
         }
       );
-      // rerenders profile/posts
+
+      const json = await response.json();
+
+      if (json == "Success!") {
+        toast.success("Edit was successful!");
+      } else {
+        toast.error("That is not your post!");
+      }
+
       setChange(true);
     } catch (error) {
       console.error(error.message);
@@ -69,10 +77,6 @@ const Post = ({ post, setChange }) => {
     }
   };
 
-  //   useEffect(() => {
-  //     setText(post.description);
-  //   }, [post]);
-
   return (
     <div>
       <p>{post.description}</p>
@@ -85,6 +89,7 @@ const Post = ({ post, setChange }) => {
           16
         )} ${post.post_time.slice(0, 10)}`}</span>
       </div>
+
       <Button onClick={deletePost}>Delete Post</Button>
 
       <Modal show={show} onHide={handleClose}>
