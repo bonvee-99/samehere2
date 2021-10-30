@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css"; // localish?
+import "react-toastify/dist/ReactToastify.css";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,6 +12,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/home/Home";
 import Browse from "./components/home/Browse";
+import Resources from "./components/resources/Resources";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -75,7 +77,7 @@ function App() {
             path="/home"
             render={(props) => {
               return isAuthenticated ? (
-                <Home {...props} />
+                <Home {...props} setAuth={setAuth} />
               ) : (
                 <Redirect to="/browse" />
               );
@@ -90,6 +92,12 @@ function App() {
               ) : (
                 <Redirect to="/home" />
               );
+            }}
+          />
+          <Route
+            path="/resources"
+            render={(props) => {
+              return <Resources {...props} />;
             }}
           />
         </Switch>

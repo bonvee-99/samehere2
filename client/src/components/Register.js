@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { Button, Container, Form, FloatingLabel } from "react-bootstrap";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
 

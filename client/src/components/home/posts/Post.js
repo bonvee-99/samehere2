@@ -1,5 +1,5 @@
 import { Modal, Button, InputGroup, FormControl } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 toast.configure();
@@ -27,7 +27,7 @@ const Post = ({ post, setChange }) => {
         }
       );
       const json = await response.json();
-      if (json == "Success!") {
+      if (json === "Success!") {
         toast.success("Post was deleted!");
       } else {
         toast.error(json);
@@ -57,7 +57,7 @@ const Post = ({ post, setChange }) => {
 
       const json = await response.json();
 
-      if (json == "Success!") {
+      if (json === "Success!") {
         toast.success("Edit was successful!");
       } else {
         toast.error("That is not your post!");
@@ -69,11 +69,11 @@ const Post = ({ post, setChange }) => {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (text.length > 0) {
-      await edit(text);
+      edit(text);
       setShow(false);
-      setText(text);
+      setText(post.description);
     }
   };
 

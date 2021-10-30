@@ -5,6 +5,8 @@ const pool = require("../db");
 // -----> POSTS -----> //
 
 // must check if user exists still??? ... if they have token and try to make requests then it will bug out... add later
+// their token wiill still be valid/so they will be authorized but will there will be no more user with that id
+// maybe just check in authorize if that user still exists...
 
 // Gets all user info - name, email and their posts if they exist as well as anyone else's posts. Ordered by post time
 router.get("/", authorize, async (req, res) => {
@@ -45,7 +47,7 @@ router.post("/posts", authorize, async (req, res) => {
       [req.user.id, description]
     );
 
-    res.json(newPost.rows[0]);
+    res.json(true);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");

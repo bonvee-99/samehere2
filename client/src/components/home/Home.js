@@ -2,6 +2,7 @@ import { Button, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Posts from "./posts/Posts";
+import Navbar from "./navbar/Nav";
 
 toast.configure();
 
@@ -25,6 +26,8 @@ const Home = ({ setAuth }) => {
       });
       const parseResponse = await response.json();
       setPosts(parseResponse);
+      const { user_name, user_email } = parseResponse[0];
+      setProfile({ user_name, user_email });
     } catch (error) {
       console.error(error.message);
     }
@@ -37,9 +40,9 @@ const Home = ({ setAuth }) => {
 
   return (
     <>
+      <Navbar profile={profile} logout={logout} setChange={setChange} />
       <Container fluid className="bg-light mt-5 p-5 text-center">
         <h1>Home page</h1>
-        <Button onClick={logout}>Logout</Button>
       </Container>
       <Posts setChange={setChange} posts={posts} />
     </>

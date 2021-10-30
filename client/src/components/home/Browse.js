@@ -1,5 +1,6 @@
 import { Button, Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Browse = () => {
   const [posts, setPosts] = useState([]);
@@ -19,7 +20,9 @@ const Browse = () => {
   return (
     <Container fluid className="bg-light mt-5 p-5 text-center">
       <h1>Browse Page</h1>
-      <Button>Login!</Button>
+      <Link to="/login">
+        <Button>Login!</Button>
+      </Link>
     </Container>
   );
 };
