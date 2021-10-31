@@ -24,20 +24,6 @@ router.get("/", authorize, async (req, res) => {
   }
 });
 
-// Gets all posts (do noot need to be logged in). Ordered by newest to oldest (PUBLIC)
-router.get("/posts", async (req, res) => {
-  try {
-    const posts = await pool.query(
-      "SELECT * FROM posts ORDER BY post_time DESC"
-    );
-
-    res.json(posts.rows);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).json("Server Error!");
-  }
-});
-
 // create a post
 router.post("/posts", authorize, async (req, res) => {
   try {
@@ -86,7 +72,7 @@ router.put("/posts/:id", authorize, async (req, res) => {
     if (updatePost.rows.length === 0) {
       return res.json("This post is not yours");
     }
-    res.json("Success!");
+    res.json(true);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");
@@ -95,12 +81,12 @@ router.put("/posts/:id", authorize, async (req, res) => {
 
 // -----> COMMENTS -----> //
 
-// get all comments on a given post and ordered by posttime
+// get all comments on a given post and ordered by posttime (inverse)
 router.get("/comments/post/:id", async (req, res) => {
   try {
     const { id } = req.params; // post id
     const comments = await pool.query(
-      "SELECT * FROM comments where post_id = $1 ORDER BY post_time DESC",
+      "SELECT * FROM comments where post_id = $1 ORDER BY post_time ASC",
       [id]
     );
 
@@ -121,7 +107,10 @@ router.post("/comments/post/:id", authorize, async (req, res) => {
       [req.user.id, id, description]
     );
 
-    res.json(newComment.rows[0]);
+    if (newComment.rows.length === 0) {
+      return res.json("Error adding comment");
+    }
+    res.json(true);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");
@@ -137,7 +126,10 @@ router.delete("/comments/:id", authorize, async (req, res) => {
       [id, req.user.id]
     );
 
-    res.json(deleteComment.rows[0]);
+    if (deleteComment.rows.length === 0) {
+      return res.json("That comment does not belong to you!");
+    }
+    res.json(true);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");

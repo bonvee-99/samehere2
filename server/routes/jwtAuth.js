@@ -97,8 +97,10 @@ router.delete("/user", authorize, async (req, res) => {
       [req.user.id]
     );
 
-    console.log(deleteUser.rows[0]);
-    res.json(deleteUser.rows[0]);
+    if (deleteUser.rows.length === 0) {
+      return res.json(false);
+    }
+    res.json(true);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");
