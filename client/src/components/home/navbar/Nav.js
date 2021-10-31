@@ -12,10 +12,6 @@ const Navigation = ({ profile, logout, setChange }) => {
             <Button variant="info">Resources</Button>
           </Link>
 
-          {/* <Link>
-            <Button>Contact</Button>
-          </Link> */}
-
           <CreatePost setChange={setChange} />
 
           <Profile profile={profile} logout={logout} />

@@ -11,9 +11,6 @@ const Welcome = () => {
       <Link to="/register" className="mx-3">
         <Button>Register</Button>
       </Link>
-      <Link to="/home" className="mx-3">
-        <Button>Browse</Button>
-      </Link>
     </Container>
   );
 };

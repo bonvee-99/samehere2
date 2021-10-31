@@ -50,9 +50,6 @@ const Register = ({ setAuth }) => {
         <Link to="/login" className="m-2">
           <Button>Login</Button>
         </Link>
-        <Link to="/home/browse" className="m-2">
-          <Button>Browse</Button>
-        </Link>
       </Container>
       <Form onSubmit={onSubmitForm}>
         <FloatingLabel

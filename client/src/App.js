@@ -11,7 +11,6 @@ import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/home/Home";
-import Browse from "./components/home/Browse";
 import Resources from "./components/resources/Resources";
 
 function App() {
@@ -79,21 +78,11 @@ function App() {
               return isAuthenticated ? (
                 <Home {...props} setAuth={setAuth} />
               ) : (
-                <Redirect to="/browse" />
+                <Redirect to="/" />
               );
             }}
           />
 
-          <Route
-            path="/browse"
-            render={(props) => {
-              return !isAuthenticated ? (
-                <Browse {...props} />
-              ) : (
-                <Redirect to="/home" />
-              );
-            }}
-          />
           <Route
             path="/resources"
             render={(props) => {

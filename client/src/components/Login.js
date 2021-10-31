@@ -49,9 +49,6 @@ const Login = ({ setAuth }) => {
         <Link to="/register" className="m-2">
           <Button>Register</Button>
         </Link>
-        <Link to="/home/browse" className="m-2">
-          <Button>Browse</Button>
-        </Link>
       </Container>
       <Form onSubmit={onSubmitForm}>
         <FloatingLabel
