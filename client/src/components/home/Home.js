@@ -41,8 +41,8 @@ const Home = ({ setAuth }) => {
   return (
     <>
       <Navbar profile={profile} logout={logout} setChange={setChange} />
-      <Container fluid className="bg-light mt-5 p-5 text-center">
-        <h1>Home page</h1>
+      <Container fluid className="bg-light mt-5 p-5 text-center mb-5">
+        <h1>Add Posts and Comment!</h1>
       </Container>
       <Posts setChange={setChange} posts={posts} />
     </>

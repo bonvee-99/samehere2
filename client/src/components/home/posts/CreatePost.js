@@ -45,7 +45,7 @@ const CreatePost = ({ setChange }) => {
   };
 
   const handleSubmit = () => {
-    if (text.length > 0) {
+    if (text.length > 0 && text.length <= 250) {
       post(text);
       setShow(false);
       handleClose();
@@ -54,13 +54,13 @@ const CreatePost = ({ setChange }) => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="success" onClick={handleShow}>
         Post
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Create Post (under 100 characters)</Modal.Title>
+          <Modal.Title>Create Post (under 250 characters)</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <InputGroup size="sm" className="mb-3">

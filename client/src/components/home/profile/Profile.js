@@ -21,8 +21,10 @@ const Profile = ({ profile, logout }) => {
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <Button onClick={logout}>Logout</Button>
-          <Button>Delete Account</Button>
+          <Button variant="warning" onClick={logout}>
+            Logout
+          </Button>
+          <Button variant="danger">Delete Account</Button>
         </Offcanvas.Body>
       </Offcanvas>
     </>

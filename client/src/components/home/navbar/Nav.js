@@ -7,15 +7,14 @@ const Navigation = ({ profile, logout, setChange }) => {
   return (
     <Navbar bg="light" variant="light" sticky="top">
       <Container>
-        <Navbar href="#home">Navbar</Navbar>
         <Nav className="me-auto">
           <Link to="/resources">
-            <Button>Resources</Button>
+            <Button variant="info">Resources</Button>
           </Link>
 
-          <Link>
+          {/* <Link>
             <Button>Contact</Button>
-          </Link>
+          </Link> */}
 
           <CreatePost setChange={setChange} />
 

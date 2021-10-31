@@ -1,6 +1,7 @@
 import { Modal, Button, InputGroup, FormControl } from "react-bootstrap";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import styles from "./Post.module.css";
 
 toast.configure();
 
@@ -69,19 +70,18 @@ const Post = ({ post, setChange }) => {
     }
   };
 
-  const handleSubmit = () => {
-    if (text.length > 0) {
+  const handleSubmit = async () => {
+    if (text.length > 0 && text.length <= 250) {
       edit(text);
       setShow(false);
-      setText(post.description);
+      setText(text);
     }
   };
 
   return (
-    <div>
-      <p>{post.description}</p>
-      <div>
-        <Button variant="primary" onClick={handleShow}>
+    <div className={styles.post}>
+      <div className={styles.editTimeCtn}>
+        <Button variant="warning" onClick={handleShow}>
           Edit
         </Button>
         <span>{`posted/edited @ ${post.post_time.slice(
@@ -90,7 +90,11 @@ const Post = ({ post, setChange }) => {
         )} ${post.post_time.slice(0, 10)}`}</span>
       </div>
 
-      <Button onClick={deletePost}>Delete Post</Button>
+      <Button variant="danger" className={styles.delete} onClick={deletePost}>
+        Delete Post
+      </Button>
+
+      <p className={styles.postText}>{post.description}</p>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

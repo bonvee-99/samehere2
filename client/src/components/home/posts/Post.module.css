@@ -1,0 +1,28 @@
+.post {
+  position: relative;
+  left: 20%;
+  width: 50%;
+  min-height: 200px;
+  padding: 1em;
+  background-color: lightblue;
+  margin: 0 5% 1em 5%;
+}
+
+@media only screen and (max-width: 1000px) {
+  .post {
+    left: 0;
+    width: 90%;
+  }
+}
+
+.postText {
+  margin-top: 0.5em;
+  word-wrap: break-word;
+}
+
+.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1em;
+}
