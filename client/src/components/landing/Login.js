@@ -45,22 +45,10 @@ const Login = ({ setAuth }) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        width: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#00A1E4",
-      }}
-    >
-      <div className={styles.card}>
+    <div className={styles.mainContainer}>
+      <div className={styles.logincard}>
         <LandingImage />
-        <div
-          className="text-center"
-          style={{ width: "40%", marginBottom: "100px" }}
-        >
+        <div className={`text-center ${styles.login}`}>
           <h1>Login</h1>
           <Link to="/register">
             <Button variant="link">Create Account</Button>

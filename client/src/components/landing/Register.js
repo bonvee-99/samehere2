@@ -56,12 +56,9 @@ const Register = ({ setAuth }) => {
         backgroundColor: "#00A1E4",
       }}
     >
-      <div className={styles.card}>
-        <LandingImage />
-        <div
-          className="text-center"
-          style={{ width: "40%", marginBottom: "100px" }}
-        >
+      <div className={styles.registercard}>
+        {/* <LandingImage /> */}
+        <div className="text-center mx-5" style={{ width: "100%" }}>
           <h1>Register</h1>
           <Link to="/" className="m-2">
             <Button variant="link">Login</Button>
@@ -106,7 +103,7 @@ const Register = ({ setAuth }) => {
                 onChange={onChange}
               />
             </FloatingLabel>
-            <Button variant="success" type="submit" className="mx-5">
+            <Button variant="success" type="submit" className="mt-5">
               Register
             </Button>
           </Form>

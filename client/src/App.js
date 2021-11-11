@@ -9,8 +9,8 @@ import {
 } from "react-router-dom";
 import Login from "./components/landing/Login";
 import Register from "./components/landing/Register";
-import Home from "./components/home/Home";
-import Resources from "./components/resources/Resources";
+import Home from "./components/main/Home";
+import Resources from "./components/help/Resources";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

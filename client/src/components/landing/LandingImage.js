@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 
 const LandingImage = () => {
   return (
-    <div style={{ width: "60%" }} className="text-center">
+    <div style={{ width: "60%" }} className="text-center mt-5">
       <h1 className="mb-2">Welcome to Same Here!</h1>
       <p>Post about your experiences and any advice you have</p>
       <h4>Find resources without logging in...</h4>
