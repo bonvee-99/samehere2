@@ -55,7 +55,7 @@ const Post = ({ post, setChange }) => {
     if (showComments) {
       setShowComments(false);
     } else {
-      loadComments();
+      await loadComments();
       setShowComments(true);
     }
   };
@@ -79,7 +79,7 @@ const Post = ({ post, setChange }) => {
 
       <p className={styles.postText}>{post.description}</p>
 
-      {showComments && (
+      {showComments && comments.length !== 0 && (
         <Comments comments={comments} loadComments={loadComments} />
       )}
     </div>

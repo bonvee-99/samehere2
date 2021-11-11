@@ -7,9 +7,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Welcome from "./components/Welcome";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Login from "./components/landing/Login";
+import Register from "./components/landing/Register";
 import Home from "./components/home/Home";
 import Resources from "./components/resources/Resources";
 
@@ -46,13 +45,6 @@ function App() {
           <Route
             exact
             path="/"
-            render={(props) => {
-              return <Welcome {...props} />;
-            }}
-          />
-
-          <Route
-            path="/login"
             render={(props) => {
               return isAuthenticated ? (
                 <Redirect to="/home" />
