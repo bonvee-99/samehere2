@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { FaTrashAlt } from "react-icons/fa";
 
 const Comment = ({ comment, loadComments }) => {
   const deleteComment = async () => {
@@ -24,10 +25,21 @@ const Comment = ({ comment, loadComments }) => {
   };
 
   return (
-    <div style={{ marginBottom: "1em" }}>
-      <p>{comment.description}</p>
-      <Button style={{ fontSize: "0.5rem" }} onClick={deleteComment}>
-        Delete
+    <div
+      style={{
+        position: "relative",
+        marginBottom: "2em",
+        borderRight: "3px solid black",
+        borderTop: "3px solid black",
+      }}
+    >
+      <p style={{ width: "90%" }}>{comment.description}</p>
+      <Button
+        variant="link"
+        style={{ fontSize: "0.5rem", position: "absolute", right: 0, top: 0 }}
+        onClick={deleteComment}
+      >
+        <FaTrashAlt />
       </Button>
     </div>
   );

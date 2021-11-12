@@ -7,7 +7,7 @@ const LandingImage = () => {
       <h1 className="mb-2">Welcome to Same Here!</h1>
       <p>Post about your experiences and any advice you have</p>
       <h4>Find resources without logging in...</h4>
-      <Link to="/resources" className="mx-5">
+      <Link to="/resources">
         <Button variant="link">Resources</Button>
       </Link>
       <svg

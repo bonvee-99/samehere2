@@ -5,6 +5,7 @@ import Comments from "./Comments";
 import { toast } from "react-toastify";
 import styles from "./Post.module.css";
 import { useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
 
 toast.configure();
 
@@ -62,26 +63,31 @@ const Post = ({ post, setChange }) => {
 
   return (
     <div className={styles.post}>
-      <div className={styles.editTimeCtn}>
-        <Edit post={post} setChange={setChange} />
-        <span>{`posted/edited @ ${post.post_time.slice(
-          11,
-          16
-        )} ${post.post_time.slice(0, 10)}`}</span>
+      <div>
+        <span>{`@${post.post_time.slice(11, 16)} ${post.post_time.slice(
+          0,
+          10
+        )}`}</span>
       </div>
 
-      <Button variant="danger" className={styles.delete} onClick={deletePost}>
-        Delete Post
+      <Button variant="link" className={styles.delete} onClick={deletePost}>
+        <FaTrashAlt />
       </Button>
-
-      <AddComment id={post.post_id} loadComments={loadComments} />
-      <Button onClick={toggleComments}>Show Comments</Button>
 
       <p className={styles.postText}>{post.description}</p>
 
       {showComments && comments.length !== 0 && (
         <Comments comments={comments} loadComments={loadComments} />
       )}
+      <div className={styles.control}>
+        {showComments && (
+          <AddComment id={post.post_id} loadComments={loadComments} />
+        )}
+        <Button variant="link" onClick={toggleComments}>
+          Comments
+        </Button>
+        <Edit post={post} setChange={setChange} />
+      </div>
     </div>
   );
 };

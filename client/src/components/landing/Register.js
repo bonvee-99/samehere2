@@ -57,8 +57,7 @@ const Register = ({ setAuth }) => {
       }}
     >
       <div className={styles.registercard}>
-        {/* <LandingImage /> */}
-        <div className="text-center mx-5" style={{ width: "100%" }}>
+        <div className={`text-center ${styles.register}`}>
           <h1>Register</h1>
           <Link to="/" className="m-2">
             <Button variant="link">Login</Button>

@@ -58,7 +58,7 @@ const Edit = ({ post, setChange }) => {
 
   return (
     <>
-      <Button variant="warning" onClick={handleShow}>
+      <Button variant="link" onClick={handleShow}>
         Edit
       </Button>
       <Modal show={show} onHide={handleClose}>

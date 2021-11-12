@@ -4,8 +4,9 @@
   width: 50%;
   min-height: 200px;
   padding: 1em;
-  background-color: lightblue;
-  margin: 0 5% 1em 5%;
+  background-color: hsl(220, 8%, 92%);
+  margin: 0 5% 2em 5%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
 
 @media only screen and (max-width: 1000px) {
@@ -24,5 +25,15 @@
   position: absolute;
   top: 0;
   right: 0;
-  margin: 1em;
+  color: #dc0073;
+}
+
+.delete:hover {
+  color: #dc0000;
+}
+
+.control {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

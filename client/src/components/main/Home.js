@@ -39,13 +39,13 @@ const Home = ({ setAuth }) => {
   }, [change]);
 
   return (
-    <>
+    <div style={{ backgroundColor: "#00A1E4", paddingBottom: "1em" }}>
       <Navbar profile={profile} logout={logout} setChange={setChange} />
       <Container fluid className="bg-light mt-5 p-5 text-center mb-5">
-        <h1>Add Posts and Comment!</h1>
+        <h1>News and Announcements!</h1>
       </Container>
       <Posts setChange={setChange} posts={posts} />
-    </>
+    </div>
   );
 };
 

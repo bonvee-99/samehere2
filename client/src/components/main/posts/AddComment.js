@@ -57,8 +57,8 @@ const AddComment = ({ id, loadComments }) => {
 
   return (
     <>
-      <Button variant="success" onClick={handleShow}>
-        Comment
+      <Button variant="link" onClick={handleShow}>
+        Add Comment
       </Button>
 
       <Modal show={show} onHide={handleClose}>
