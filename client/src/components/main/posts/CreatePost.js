@@ -54,7 +54,7 @@ const CreatePost = ({ setChange }) => {
 
   return (
     <>
-      <Button variant="success" onClick={handleShow}>
+      <Button variant="link" onClick={handleShow}>
         Post
       </Button>
 

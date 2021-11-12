@@ -30,7 +30,6 @@ const Comment = ({ comment, loadComments }) => {
         position: "relative",
         marginBottom: "2em",
         borderRight: "3px solid black",
-        borderTop: "3px solid black",
       }}
     >
       <p style={{ width: "90%" }}>{comment.description}</p>

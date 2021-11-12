@@ -5,11 +5,11 @@ import CreatePost from "../posts/CreatePost";
 
 const Navigation = ({ profile, logout, setChange }) => {
   return (
-    <Navbar bg="light" variant="light" sticky="top">
+    <Navbar style={{ backgroundColor: "#EAEBED" }} sticky="top">
       <Container>
         <Nav className="me-auto">
           <Link to="/resources">
-            <Button variant="info">Resources</Button>
+            <Button variant="link">Resources</Button>
           </Link>
 
           <CreatePost setChange={setChange} />

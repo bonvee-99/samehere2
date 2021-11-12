@@ -33,7 +33,7 @@ const Profile = ({ profile, logout }) => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="link" onClick={handleShow}>
         Profile
       </Button>
 

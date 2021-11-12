@@ -1,8 +1,9 @@
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import Posts from "./posts/Posts";
 import Navbar from "./navbar/Nav";
+import styles from "./Home.module.css";
 
 toast.configure();
 
@@ -39,10 +40,15 @@ const Home = ({ setAuth }) => {
   }, [change]);
 
   return (
-    <div style={{ backgroundColor: "#00A1E4", paddingBottom: "1em" }}>
+    <div className={styles.container}>
       <Navbar profile={profile} logout={logout} setChange={setChange} />
-      <Container fluid className="bg-light mt-5 p-5 text-center mb-5">
-        <h1>News and Announcements!</h1>
+      <Container
+        fluid
+        className="bg-light my-5 p-4 text-center"
+        style={{ boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)" }}
+      >
+        <h1>Same Here</h1>
+        <h2>News and Announcements!</h2>
       </Container>
       <Posts setChange={setChange} posts={posts} />
     </div>
