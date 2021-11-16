@@ -13,7 +13,7 @@ const Posts = ({ posts, setChange }) => {
   return (
     <div>
       {allPosts.length !== 0 &&
-        allPosts.post_id !== null &&
+        allPosts[0].post_id !== null &&
         allPosts.map((post) => (
           <Post key={post.post_id} post={post} setChange={setChange} />
         ))}

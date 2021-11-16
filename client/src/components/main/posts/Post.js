@@ -64,10 +64,12 @@ const Post = ({ post, setChange }) => {
   return (
     <div className={styles.post}>
       <div>
+        (
         <span>{`@${post.post_time.slice(11, 16)} ${post.post_time.slice(
           0,
           10
         )}`}</span>
+        )
       </div>
 
       <Button variant="link" className={styles.delete} onClick={deletePost}>

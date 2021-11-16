@@ -36,7 +36,7 @@ function App() {
 
   useEffect(() => {
     isAuth();
-  }); // we want this to happen on load as well as anytime isAuthenticated changes
+  }); // we want this to happen on load as well anytime route request changes
 
   return (
     <>
