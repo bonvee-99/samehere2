@@ -47,7 +47,7 @@ function App() {
             path="/"
             render={(props) => {
               return isAuthenticated ? (
-                <Redirect to="/home" />
+                <Redirect to="/main" />
               ) : (
                 <Login {...props} setAuth={setAuth} />
               );
@@ -57,7 +57,7 @@ function App() {
             path="/register"
             render={(props) => {
               return isAuthenticated ? (
-                <Redirect to="/home" />
+                <Redirect to="/main" />
               ) : (
                 <Register {...props} setAuth={setAuth} />
               );
@@ -65,7 +65,7 @@ function App() {
           />
 
           <Route
-            path="/home"
+            path="/main"
             render={(props) => {
               return isAuthenticated ? (
                 <Home {...props} setAuth={setAuth} />
