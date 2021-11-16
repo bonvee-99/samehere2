@@ -22,6 +22,10 @@ app.use("/auth", require("./routes/jwtAuth"));
 
 app.use("/home", require("./routes/home"));
 
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
 });
