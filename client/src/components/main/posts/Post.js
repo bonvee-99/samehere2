@@ -15,13 +15,10 @@ const Post = ({ post, setChange }) => {
 
   const deletePost = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/home/posts/${post.post_id}`,
-        {
-          method: "DELETE",
-          headers: { token: localStorage.token },
-        }
-      );
+      const response = await fetch(`/home/posts/${post.post_id}`, {
+        method: "DELETE",
+        headers: { token: localStorage.token },
+      });
       const json = await response.json();
       if (json === "Success!") {
         toast.success("Post was deleted!");
@@ -37,13 +34,10 @@ const Post = ({ post, setChange }) => {
 
   const loadComments = async () => {
     try {
-      const comments = await fetch(
-        `http://localhost:5000/home/comments/post/${post.post_id}`,
-        {
-          method: "GET",
-          headers: { token: localStorage.token },
-        }
-      );
+      const comments = await fetch(`/home/comments/post/${post.post_id}`, {
+        method: "GET",
+        headers: { token: localStorage.token },
+      });
 
       const json = await comments.json();
       setComments(json);

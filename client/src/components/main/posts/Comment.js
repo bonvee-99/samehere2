@@ -5,13 +5,10 @@ import { FaTrashAlt } from "react-icons/fa";
 const Comment = ({ comment, loadComments }) => {
   const deleteComment = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/home/comments/${comment.comm_id}`,
-        {
-          method: "DELETE",
-          headers: { token: localStorage.token },
-        }
-      );
+      const response = await fetch(`/home/comments/${comment.comm_id}`, {
+        method: "DELETE",
+        headers: { token: localStorage.token },
+      });
       const json = await response.json();
       if (json === true) {
         toast.success("Comment was deleted!");

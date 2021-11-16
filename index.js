@@ -1,13 +1,16 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const path = require("path");
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+app.use(cors());
+
+// serve build if in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
 
 // ----- ROUTES ----- //
 
@@ -19,6 +22,6 @@ app.use("/auth", require("./routes/jwtAuth"));
 
 app.use("/home", require("./routes/home"));
 
-app.listen(5000, () => {
-  console.log("server is running on port ");
+app.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}`);
 });

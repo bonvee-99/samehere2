@@ -24,7 +24,7 @@ const CreatePost = ({ setChange }) => {
 
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("token", localStorage.token);
-      const response = await fetch("http://localhost:5000/home/posts/", {
+      const response = await fetch("/home/posts/", {
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify(body),

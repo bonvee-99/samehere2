@@ -15,14 +15,11 @@ const Edit = ({ post, setChange }) => {
 
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("token", localStorage.token);
-      const response = await fetch(
-        `http://localhost:5000/home/posts/${post.post_id}`,
-        {
-          method: "PUT",
-          headers: myHeaders,
-          body: JSON.stringify(body),
-        }
-      );
+      const response = await fetch(`/home/posts/${post.post_id}`, {
+        method: "PUT",
+        headers: myHeaders,
+        body: JSON.stringify(body),
+      });
 
       const json = await response.json();
 

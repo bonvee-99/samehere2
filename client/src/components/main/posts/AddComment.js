@@ -25,14 +25,11 @@ const AddComment = ({ id, loadComments }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("token", localStorage.token);
 
-      const comment = await fetch(
-        `http://localhost:5000/home/comments/post/${id}`,
-        {
-          method: "POST",
-          headers: myHeaders,
-          body: JSON.stringify(body),
-        }
-      );
+      const comment = await fetch(`/home/comments/post/${id}`, {
+        method: "POST",
+        headers: myHeaders,
+        body: JSON.stringify(body),
+      });
 
       const json = await comment.json();
 

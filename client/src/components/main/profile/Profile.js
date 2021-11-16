@@ -12,7 +12,7 @@ const Profile = ({ profile, logout }) => {
 
   const deleteAccount = async () => {
     try {
-      const account = await fetch("http://localhost:5000/auth/user", {
+      const account = await fetch("/auth/user", {
         method: "DELETE",
         headers: { token: localStorage.token },
       });
