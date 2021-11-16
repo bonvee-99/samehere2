@@ -24,7 +24,10 @@ app.use("/home", require("./routes/home"));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build/index.html"));
+  // this sends heroku to the client page and then displays the route "*". If this is some random route then it will not work.
 });
+
+// problem... heroku is using server routes instead of client routes when you type them into url
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);

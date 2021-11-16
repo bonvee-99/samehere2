@@ -43,17 +43,6 @@ function App() {
       <Router>
         <Switch>
           <Route
-            exact
-            path="/"
-            render={(props) => {
-              return isAuthenticated ? (
-                <Redirect to="/main" />
-              ) : (
-                <Login {...props} setAuth={setAuth} />
-              );
-            }}
-          />
-          <Route
             path="/register"
             render={(props) => {
               return isAuthenticated ? (
@@ -79,6 +68,17 @@ function App() {
             path="/resources"
             render={(props) => {
               return <Resources {...props} />;
+            }}
+          />
+
+          <Route
+            path="/"
+            render={(props) => {
+              return isAuthenticated ? (
+                <Redirect to="/main" />
+              ) : (
+                <Login {...props} setAuth={setAuth} />
+              );
             }}
           />
         </Switch>
