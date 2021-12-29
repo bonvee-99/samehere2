@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css"; // localish?
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -20,12 +20,12 @@ function App() {
 
   const isAuthenticated = useSelector((state) => state.authentication.value);
 
-  async function checkAuth() {
+  const checkAuth = async () => {
     const resultAction = await dispatch(isAuth());
     if (!isAuth.fulfilled.match(resultAction)) {
       console.error(resultAction.payload);
     }
-  }
+  };
 
   useEffect(() => {
     checkAuth();

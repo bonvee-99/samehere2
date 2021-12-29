@@ -78,12 +78,11 @@ export const authenticatedSlice = createSlice({
       }
     });
     builder.addCase(register.fulfilled, (state, { payload }) => {
-      if (payload.token) {
-        localStorage.setItem("token", payload.token);
-        state.value = true;
-      } else {
-        state.value = false;
-      }
+      // if (payload.token) {
+      //   redirect;
+      // } else {
+      //   state.value = false;
+      // }
     });
     builder.addCase(isAuth.fulfilled, (state, { payload }) => {
       if (payload === true) {
@@ -100,3 +99,5 @@ export const { removeAuth } = authenticatedSlice.actions;
 
 // for store
 export default authenticatedSlice.reducer;
+
+// TODO: change name from authentication...

@@ -36,4 +36,21 @@ const validateInfo = (req, res, next) => {
   next();
 };
 
-module.exports = validateInfo;
+const validateEmail = (req, res, next) => {
+  const validEmail = (userEmail) => {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail);
+  };
+
+  const { email } = req.body;
+  if (!email) {
+    return res.status(401).json("Please input in email");
+  } else if (!validEmail(email)) {
+    return res.status(401).json("Invalid email");
+  }
+  next();
+};
+
+module.exports = {
+  validateInfo,
+  validateEmail,
+};

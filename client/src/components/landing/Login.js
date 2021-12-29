@@ -13,6 +13,8 @@ toast.configure();
 const Login = () => {
   const dispatch = useDispatch();
 
+  const [showSendLink, setShowSendLink] = useState(false);
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -34,9 +36,35 @@ const Login = () => {
         toast.success("login successful");
       } else {
         toast.error(resultAction.payload);
+        if (resultAction.payload === "Please confirm email!") {
+          setShowSendLink(true);
+        }
       }
     } else {
       console.error("resultAction.payload");
+    }
+  };
+
+  // sends user new verification code
+  const sendNewVerification = async () => {
+    try {
+      const body = { email };
+
+      const response = await fetch("/auth/confirmation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      const parseResponse = await response.json();
+
+      if (parseResponse === true) {
+        toast.success(`A new verification link was sent to ${email}`);
+      } else {
+        toast.error(parseResponse);
+      }
+    } catch (error) {
+      console.error(error.message);
     }
   };
 
@@ -79,6 +107,15 @@ const Login = () => {
             <Button variant="success" type="submit" className="mt-5">
               Login
             </Button>
+            {showSendLink && (
+              <Button
+                onClick={sendNewVerification}
+                variant="warning"
+                className="mt-5"
+              >
+                Send Verification
+              </Button>
+            )}
           </Form>
         </div>
       </div>

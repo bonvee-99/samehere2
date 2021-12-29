@@ -6,10 +6,13 @@ import styles from "./Card.module.css";
 
 import { useDispatch } from "react-redux";
 import { register } from "../../feature/authenticationSlice";
+import { useHistory } from "react-router-dom";
 
 toast.configure();
 
 const Register = () => {
+  const history = useHistory();
+
   const dispatch = useDispatch();
 
   const [inputs, setInputs] = useState({
@@ -30,13 +33,14 @@ const Register = () => {
     const resultAction = await dispatch(register({ body }));
 
     if (register.fulfilled.match(resultAction)) {
-      if (resultAction.payload.token) {
-        toast.success("register successful");
+      if (resultAction.payload === true) {
+        toast.success("Registration successful. Please verify email");
+        history.push("/");
       } else {
         toast.error(resultAction.payload);
       }
     } else {
-      console.error("resultAction.payload");
+      console.error(resultAction.payload);
     }
   };
 

@@ -4,6 +4,7 @@ CREATE extension IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE users (
 	user_id UUID DEFAULT uuid_generate_v4(),
+	confirmed BOOLEAN NOT NULL DEFAULT FALSE,
 	user_name VARCHAR(50) NOT NULL,
 	user_email VARCHAR(50) NOT NULL UNIQUE,
 	user_password VARCHAR(255) NOT NULL,
