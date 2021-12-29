@@ -13,11 +13,29 @@ router.get("/", authorize, async (req, res) => {
   try {
     // queries all posts and the given user information
     const userPosts = await pool.query(
-      "SELECT u.user_name, u.user_email, p.post_id, p.description, p.post_time, p.user_id AS author FROM users AS u LEFT JOIN posts as p ON u.user_id = p.user_id OR u.user_id != p.user_id WHERE u.user_id = $1 ORDER BY p.post_time DESC",
+      "SELECT u.user_name, u.user_email, u.user_id, p.post_id, p.description, p.post_time, p.user_id AS author FROM users AS u LEFT JOIN posts as p ON u.user_id = p.user_id OR u.user_id != p.user_id WHERE u.user_id = $1 ORDER BY p.post_time DESC",
       [req.user.id]
     );
 
-    res.json(userPosts.rows);
+    const posts = userPosts.rows.map((post) => {
+      const author = post.author;
+      const userId = post.user_id;
+      delete post.author;
+      delete post.user_id;
+      if (author === userId) {
+        return {
+          ...post,
+          owned: true,
+        };
+      } else {
+        return {
+          ...post,
+          owned: false,
+        };
+      }
+    });
+
+    res.json(posts);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");
@@ -82,15 +100,36 @@ router.put("/posts/:id", authorize, async (req, res) => {
 // -----> COMMENTS -----> //
 
 // get all comments on a given post and ordered by posttime (inverse)
-router.get("/comments/post/:id", async (req, res) => {
+router.get("/comments/post/:id", authorize, async (req, res) => {
   try {
     const { id } = req.params; // post id
     const comments = await pool.query(
       "SELECT * FROM comments where post_id = $1 ORDER BY post_time ASC",
       [id]
     );
+    const user = await pool.query(
+      "SELECT user_id FROM users where user_id = $1",
+      [req.user.id]
+    );
 
-    res.json(comments.rows);
+    const refaComments = comments.rows.map((comment) => {
+      const owner = comment.user_id;
+      delete comment.user_id;
+
+      if (owner === user.rows[0].user_id) {
+        return {
+          ...comment,
+          owned: true,
+        };
+      } else {
+        return {
+          ...comment,
+          owned: false,
+        };
+      }
+    });
+
+    res.json(refaComments);
   } catch (error) {
     console.error(error.message);
     res.status(500).json("Server Error!");

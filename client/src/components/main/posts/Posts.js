@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Post from "./Post";
 
-const Posts = ({ posts, setChange }) => {
+const Posts = ({ posts }) => {
   const [allPosts, setPosts] = useState(posts);
 
   // need to call this because we initially pass in 0 posts but once getProfile finishes running it changes props
@@ -14,9 +14,7 @@ const Posts = ({ posts, setChange }) => {
     <div>
       {allPosts.length !== 0 &&
         allPosts[0].post_id !== null &&
-        allPosts.map((post) => (
-          <Post key={post.post_id} post={post} setChange={setChange} />
-        ))}
+        allPosts.map((post) => <Post key={post.post_id} post={post} />)}
     </div>
   );
 };

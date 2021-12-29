@@ -3,11 +3,15 @@ import { Button, Container, Form, FloatingLabel } from "react-bootstrap";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import styles from "./Card.module.css";
-import LandingImage from "./LandingImage";
+
+import { useDispatch } from "react-redux";
+import { register } from "../../feature/authenticationSlice";
 
 toast.configure();
 
-const Register = ({ setAuth }) => {
+const Register = () => {
+  const dispatch = useDispatch();
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -22,29 +26,20 @@ const Register = ({ setAuth }) => {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
+    const body = { email, password, name };
+    const resultAction = await dispatch(register({ body }));
 
-    try {
-      const body = { email, password, name };
-      const response = await fetch("/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-
-      const parseRes = await response.json();
-
-      if (parseRes.token) {
-        localStorage.setItem("token", parseRes.token);
-        setAuth(true);
-        toast.success("Registered Successfully");
+    if (register.fulfilled.match(resultAction)) {
+      if (resultAction.payload.token) {
+        toast.success("register successful");
       } else {
-        setAuth(false);
-        toast.error(parseRes);
+        toast.error(resultAction.payload);
       }
-    } catch (error) {
-      console.error(error.message);
+    } else {
+      console.error("resultAction.payload");
     }
   };
+
   return (
     <div
       style={{

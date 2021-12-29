@@ -2,9 +2,14 @@ import { useState } from "react";
 import { Modal, FormControl, Button, InputGroup } from "react-bootstrap";
 import { toast } from "react-toastify";
 
+import { useDispatch } from "react-redux";
+import { createPost } from "../../../feature/profileSlice";
+
 toast.configure();
 
-const CreatePost = ({ setChange }) => {
+const CreatePost = () => {
+  const dispatch = useDispatch();
+
   const [text, setText] = useState("");
   const [show, setShow] = useState(false);
 
@@ -18,29 +23,15 @@ const CreatePost = ({ setChange }) => {
   };
 
   const post = async (description) => {
-    try {
-      const body = { description };
-      const myHeaders = new Headers();
-
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("token", localStorage.token);
-      const response = await fetch("/home/posts/", {
-        method: "POST",
-        headers: myHeaders,
-        body: JSON.stringify(body),
-      });
-
-      const json = await response.json();
-
-      if (json === true) {
+    const resultAction = await dispatch(
+      createPost({ description, token: localStorage.token })
+    );
+    if (createPost.fulfilled.match(resultAction)) {
+      if (resultAction.payload === true) {
         toast.success("Post was successful!");
       } else {
-        toast.error(json);
+        toast.error(resultAction.payload);
       }
-
-      setChange(true);
-    } catch (error) {
-      console.error(error.message);
     }
   };
 

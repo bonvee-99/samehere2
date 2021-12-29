@@ -30,13 +30,15 @@ const Comment = ({ comment, loadComments }) => {
       }}
     >
       <p style={{ width: "90%" }}>{comment.description}</p>
-      <Button
-        variant="link"
-        style={{ fontSize: "0.5rem", position: "absolute", right: 0, top: 0 }}
-        onClick={deleteComment}
-      >
-        <FaTrashAlt />
-      </Button>
+      {comment.owned && (
+        <Button
+          variant="link"
+          style={{ fontSize: "0.5rem", position: "absolute", right: 0, top: 0 }}
+          onClick={deleteComment}
+        >
+          <FaTrashAlt />
+        </Button>
+      )}
     </div>
   );
 };

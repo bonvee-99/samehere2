@@ -2,38 +2,27 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { Modal, Button, InputGroup, FormControl } from "react-bootstrap";
 
+import { useDispatch } from "react-redux";
+import { editPost } from "../../../feature/profileSlice";
+
 toast.configure();
 
-const Edit = ({ post, setChange }) => {
+const Edit = ({ post }) => {
+  const dispatch = useDispatch();
+
   const [text, setText] = useState(post.description);
   const [show, setShow] = useState(false);
 
   const edit = async (description) => {
-    try {
-      const body = { description };
-      const myHeaders = new Headers();
-
-      myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("token", localStorage.token);
-      const response = await fetch(`/home/posts/${post.post_id}`, {
-        method: "PUT",
-        headers: myHeaders,
-        body: JSON.stringify(body),
-      });
-
-      const json = await response.json();
-
-      if (json === true) {
+    const resultAction = await dispatch(
+      editPost({ description, id: post.post_id, token: localStorage.token })
+    );
+    if (editPost.fulfilled.match(resultAction)) {
+      if (resultAction.payload === true) {
         toast.success("Edit was successful!");
-        setText(text);
       } else {
-        toast.error(json);
-        setText(post.description);
+        toast.error(resultAction.payload);
       }
-
-      setChange(true);
-    } catch (error) {
-      console.error(error.message);
     }
   };
 

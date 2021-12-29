@@ -2,13 +2,24 @@ import { useState } from "react";
 import { Offcanvas, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
+import { useDispatch } from "react-redux";
+import { removeAuth } from "../../../feature/authenticationSlice";
+
 toast.configure();
 
-const Profile = ({ profile, logout }) => {
+const Profile = ({ profile }) => {
+  const dispatch = useDispatch();
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const logout = (e) => {
+    localStorage.removeItem("token");
+    dispatch(removeAuth());
+    toast.success("Logged out successfully!");
+  };
 
   const deleteAccount = async () => {
     try {

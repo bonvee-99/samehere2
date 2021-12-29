@@ -11,32 +11,25 @@ import Login from "./components/landing/Login";
 import Register from "./components/landing/Register";
 import Home from "./components/main/Home";
 import Resources from "./components/help/Resources";
+// REDUX:
+import { useSelector, useDispatch } from "react-redux";
+import { isAuth } from "./feature/authenticationSlice";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const dispatch = useDispatch();
 
-  const setAuth = (boolean) => {
-    setIsAuthenticated(boolean);
-  };
+  const isAuthenticated = useSelector((state) => state.authentication.value);
 
-  async function isAuth() {
-    try {
-      const response = await fetch("/auth/is-verified", {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
-
-      const parseRes = await response.json();
-
-      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
-    } catch (error) {
-      console.error(error.message);
+  async function checkAuth() {
+    const resultAction = await dispatch(isAuth());
+    if (!isAuth.fulfilled.match(resultAction)) {
+      console.error(resultAction.payload);
     }
   }
 
   useEffect(() => {
-    isAuth();
-  }); // we want this to happen on load as well anytime route request changes
+    checkAuth();
+  }, []);
 
   return (
     <>
@@ -49,7 +42,7 @@ function App() {
               return isAuthenticated ? (
                 <Redirect to="/main" />
               ) : (
-                <Login {...props} setAuth={setAuth} />
+                <Login {...props} />
               );
             }}
           />
@@ -60,7 +53,7 @@ function App() {
               return isAuthenticated ? (
                 <Redirect to="/main" />
               ) : (
-                <Register {...props} setAuth={setAuth} />
+                <Register {...props} />
               );
             }}
           />
@@ -69,7 +62,7 @@ function App() {
             path="/main"
             render={(props) => {
               return isAuthenticated ? (
-                <Home {...props} setAuth={setAuth} />
+                <Home {...props} />
               ) : (
                 <Redirect to="/" />
               );

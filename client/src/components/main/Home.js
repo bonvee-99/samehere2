@@ -5,43 +5,25 @@ import Posts from "./posts/Posts";
 import Navbar from "./navbar/Nav";
 import styles from "./Home.module.css";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setProfile } from "../../feature/profileSlice";
+
 toast.configure();
 
-const Home = ({ setAuth }) => {
-  const [profile, setProfile] = useState({});
-  const [posts, setPosts] = useState([]);
-  const [change, setChange] = useState(false);
+const Home = () => {
+  const dispatch = useDispatch();
 
-  const logout = (e) => {
-    // e.preventDefault();
-    localStorage.removeItem("token");
-    setAuth(false);
-    toast.success("Logged out successfully!");
-  };
-
-  const getProfile = async () => {
-    try {
-      const response = await fetch("/home", {
-        method: "GET",
-        headers: { token: localStorage.token },
-      });
-      const parseResponse = await response.json();
-      setPosts(parseResponse);
-      const { user_name, user_email } = parseResponse[0];
-      setProfile({ user_name, user_email });
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  const profile = useSelector((state) => state.profile.profile);
+  const posts = useSelector((state) => state.profile.posts);
+  const change = useSelector((state) => state.profile.change);
 
   useEffect(() => {
-    getProfile();
-    setChange(false);
-  }, [change]);
+    dispatch(setProfile({ token: localStorage.token }));
+  }, [change, dispatch]);
 
   return (
     <div className={styles.container}>
-      <Navbar profile={profile} logout={logout} setChange={setChange} />
+      <Navbar profile={profile} />
       <Container
         fluid
         className="bg-light my-5 p-4 text-center"
@@ -50,7 +32,7 @@ const Home = ({ setAuth }) => {
         <h1>Same Here</h1>
         <h2>News and Announcements!</h2>
       </Container>
-      <Posts setChange={setChange} posts={posts} />
+      <Posts posts={posts} />
     </div>
   );
 };

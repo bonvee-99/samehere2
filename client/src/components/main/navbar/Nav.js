@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Profile from "../profile/Profile";
 import CreatePost from "../posts/CreatePost";
 
-const Navigation = ({ profile, logout, setChange }) => {
+const Navigation = ({ profile }) => {
   return (
     <Navbar style={{ backgroundColor: "#EAEBED" }} sticky="top">
       <Container>
@@ -12,9 +12,9 @@ const Navigation = ({ profile, logout, setChange }) => {
             <Button variant="link">Resources</Button>
           </Link>
 
-          <CreatePost setChange={setChange} />
+          <CreatePost />
 
-          <Profile profile={profile} logout={logout} />
+          <Profile profile={profile} />
         </Nav>
       </Container>
     </Navbar>
