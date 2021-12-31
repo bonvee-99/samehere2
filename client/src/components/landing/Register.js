@@ -1,19 +1,17 @@
 import { Link } from "react-router-dom";
-import { Button, Container, Form, FloatingLabel } from "react-bootstrap";
+import { Button, Form, FloatingLabel } from "react-bootstrap";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import styles from "./Card.module.css";
 
 import { useDispatch } from "react-redux";
-import { register } from "../../feature/authenticationSlice";
+import { register } from "../../feature/authSlice";
 import { useHistory } from "react-router-dom";
 
 toast.configure();
 
 const Register = () => {
   const history = useHistory();
-
-  const dispatch = useDispatch();
 
   const [inputs, setInputs] = useState({
     email: "",
@@ -29,18 +27,23 @@ const Register = () => {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
-    const body = { email, password, name };
-    const resultAction = await dispatch(register({ body }));
+    try {
+      const body = { email, password, name };
+      const response = await fetch("/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
-    if (register.fulfilled.match(resultAction)) {
-      if (resultAction.payload === true) {
+      const parseResponse = await response.json();
+      if (parseResponse === true) {
         toast.success("Registration successful. Please verify email");
         history.push("/");
       } else {
-        toast.error(resultAction.payload);
+        toast.error(parseResponse);
       }
-    } else {
-      console.error(resultAction.payload);
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 

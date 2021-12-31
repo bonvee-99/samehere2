@@ -13,7 +13,7 @@ import Home from "./components/main/Home";
 import Resources from "./components/help/Resources";
 // REDUX:
 import { useSelector, useDispatch } from "react-redux";
-import { isAuth } from "./feature/authenticationSlice";
+import { isAuth } from "./feature/authSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [checkAuth]);
 
   return (
     <>

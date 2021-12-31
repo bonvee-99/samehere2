@@ -3,7 +3,7 @@ import { Offcanvas, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 import { useDispatch } from "react-redux";
-import { removeAuth } from "../../../feature/authenticationSlice";
+import { removeAuth } from "../../../feature/authSlice";
 
 toast.configure();
 

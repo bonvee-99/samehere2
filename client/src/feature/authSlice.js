@@ -23,25 +23,6 @@ export const login = createAsyncThunk(
   }
 );
 
-export const register = createAsyncThunk(
-  "auth/register",
-  async (registerData, { rejectWithValue }) => {
-    try {
-      const body = registerData.body;
-      const response = await fetch("/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-
-      const parseResponse = await response.json();
-      return parseResponse;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
 export const isAuth = createAsyncThunk(
   "auth/isAuth",
   async (data, { rejectWithValue }) => {
@@ -59,8 +40,8 @@ export const isAuth = createAsyncThunk(
   }
 );
 
-export const authenticatedSlice = createSlice({
-  name: "authentication",
+export const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {
     removeAuth: (state, action) => {
@@ -77,13 +58,6 @@ export const authenticatedSlice = createSlice({
         state.value = false;
       }
     });
-    builder.addCase(register.fulfilled, (state, { payload }) => {
-      // if (payload.token) {
-      //   redirect;
-      // } else {
-      //   state.value = false;
-      // }
-    });
     builder.addCase(isAuth.fulfilled, (state, { payload }) => {
       if (payload === true) {
         state.value = true;
@@ -95,9 +69,9 @@ export const authenticatedSlice = createSlice({
 });
 
 // for synchronous actions
-export const { removeAuth } = authenticatedSlice.actions;
+export const { removeAuth } = authSlice.actions;
 
 // for store
-export default authenticatedSlice.reducer;
+export default authSlice.reducer;
 
 // TODO: change name from authentication...

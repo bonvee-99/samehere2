@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Form, FloatingLabel, ToastContainer } from "react-bootstrap";
+import { Button, Form, FloatingLabel } from "react-bootstrap";
 import { toast } from "react-toastify";
 import LandingImage from "./LandingImage";
 import styles from "./Card.module.css";
 
 import { useDispatch } from "react-redux";
-import { login } from "../../feature/authenticationSlice";
+import { login } from "../../feature/authSlice";
 
 toast.configure();
 
