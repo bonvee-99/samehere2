@@ -11,6 +11,7 @@
 
 ## Tech Stack
 (bold) Client: JavaScript (React), Bootstrap
+
 Server: JavaScript (Node.js), PostgreSQL, Heroku
 
 ### Setup
