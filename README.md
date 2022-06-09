@@ -10,9 +10,15 @@
 - access a compilation of useful links and resources
 
 ## Tech Stack
-*Client*: JavaScript (React), Bootstrap
+**Client**: JavaScript (React), Bootstrap
 
-*Server*: JavaScript (Node.js), PostgreSQL, Heroku
+**Server**: JavaScript (Node.js), PostgreSQL, Heroku
+
+### Landing Page
+
+### Home Page
+
+### Resources Page
 
 ### Setup
 - cd client and run npm install
