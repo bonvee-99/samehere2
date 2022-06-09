@@ -18,7 +18,7 @@ Server: JavaScript (Node.js), PostgreSQL, Heroku
 - run npm run start
 - cd server and run npm install
 - must create a database locally using database.sql, an email for verification pushing, and also a .env file with corresponding fields:
-jwtSecret
+- - jwtSecret
 emailSecret
 GMAIL_USER
 GMAIL_PASS
