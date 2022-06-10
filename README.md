@@ -1,16 +1,16 @@
 # Same Here
-**Website** :link:: [Same Here](same-here.herokuapp.com)
+**Website**: [Same Here](same-here.herokuapp.com)
 <img width="1439" alt="Screen Shot 2022-06-09 at 10 06 40 PM" src="https://user-images.githubusercontent.com/73202642/172994616-417de21f-c09c-415a-b598-6794ae4eaac1.png">
 
 ## Overview
 !!!
 
-## Features :clipboard:
+## Features
 - register an accoount and login
 - create posts and comment on others
 - access a compilation of useful links and resources
 
-## Tech Stack :computer:
+## Tech Stack:
 **Client**: JavaScript (React), Bootstrap
 
 **Server**: JavaScript (Node.js), PostgreSQL, Heroku
