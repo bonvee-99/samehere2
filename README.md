@@ -1,5 +1,5 @@
 # Same Here
-**Website URL:**: [Same Here](same-here.herokuapp.com)
+**Website URL:** [Same Here](same-here.herokuapp.com)
 <img width="1439" alt="Screen Shot 2022-06-09 at 10 06 40 PM" src="https://user-images.githubusercontent.com/73202642/172994616-417de21f-c09c-415a-b598-6794ae4eaac1.png">
 
 ## Overview
