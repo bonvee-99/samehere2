@@ -15,11 +15,11 @@
 
 **Server**: JavaScript (Node.js), PostgreSQL, Heroku
 
-### Register Page
+### Home Page
 
 <img width="1438" alt="Screen Shot 2022-06-09 at 10 09 16 PM" src="https://user-images.githubusercontent.com/73202642/172994655-e7059766-24ef-4719-bbbc-346b8910b578.png">
 
-### Home Page
+### Register Page
 
 <img width="1440" alt="Screen Shot 2022-06-09 at 10 06 54 PM" src="https://user-images.githubusercontent.com/73202642/172994662-1b8f6a9d-df02-40f8-9f2b-005dca9aa6b1.png">
 
