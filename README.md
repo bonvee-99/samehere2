@@ -1,8 +1,12 @@
 # Same Here
+**Website URL:**: [Same Here](same-here.herokuapp.com)
+<img width="1439" alt="Screen Shot 2022-06-09 at 10 06 40 PM" src="https://user-images.githubusercontent.com/73202642/172994616-417de21f-c09c-415a-b598-6794ae4eaac1.png">
+<img width="1438" alt="Screen Shot 2022-06-09 at 10 09 16 PM" src="https://user-images.githubusercontent.com/73202642/172994655-e7059766-24ef-4719-bbbc-346b8910b578.png">
+<img width="1440" alt="Screen Shot 2022-06-09 at 10 06 54 PM" src="https://user-images.githubusercontent.com/73202642/172994662-1b8f6a9d-df02-40f8-9f2b-005dca9aa6b1.png">
 
-(Image)
 
 ## Overview
+!!!
 
 ## Features
 - register an accoount and login
@@ -14,7 +18,7 @@
 
 **Server**: JavaScript (Node.js), PostgreSQL, Heroku
 
-### Landing Page
+### Register Page
 
 ### Home Page
 
