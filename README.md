@@ -1,5 +1,5 @@
 # Same Here
-**Website**:link:: [Same Here](same-here.herokuapp.com)
+**Website** :link:: [Same Here](same-here.herokuapp.com)
 <img width="1439" alt="Screen Shot 2022-06-09 at 10 06 40 PM" src="https://user-images.githubusercontent.com/73202642/172994616-417de21f-c09c-415a-b598-6794ae4eaac1.png">
 
 ## Overview
@@ -15,7 +15,7 @@
 
 **Server**: JavaScript (Node.js), PostgreSQL, Heroku
 
-### Home Page
+### Homepage
 
 <img width="1438" alt="Screen Shot 2022-06-09 at 10 09 16 PM" src="https://user-images.githubusercontent.com/73202642/172994655-e7059766-24ef-4719-bbbc-346b8910b578.png">
 
