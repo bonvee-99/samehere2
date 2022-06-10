@@ -5,12 +5,12 @@
 ## Overview
 !!!
 
-## Features
+## Features :clipboard:
 - register an accoount and login
 - create posts and comment on others
 - access a compilation of useful links and resources
 
-## Tech Stack
+## Tech Stack :computer:
 **Client**: JavaScript (React), Bootstrap
 
 **Server**: JavaScript (Node.js), PostgreSQL, Heroku
