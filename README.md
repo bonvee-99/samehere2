@@ -5,7 +5,12 @@
 ## Overview
 !!!
 
-## Features
+## Technical features
+- Authorization with JSON Web Tokens
+- Email Verification
+- Client side routing
+
+## User features
 - register an accoount and login
 - create posts and comment on others
 - access a compilation of useful links and resources
