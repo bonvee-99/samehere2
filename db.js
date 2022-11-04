@@ -1,24 +1,22 @@
 const Pool = require("pg").Pool;
 require("dotenv").config();
 
-let pool;
+console.log('env', process.env)
 
-if (process.env.NODE_ENV === "production") {
-  pool = new Pool({
+const pool = process.env.NODE_ENV === "production" ?
+  new Pool({
     connectionString: process.env.DATABASE_URL, // given by heroku
     ssl: {
       rejectUnauthorized: false,
     },
+  })
+: new Pool({
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    host: process.env.POSTGRES_HOST,
+    port: process.env.POSTGRES_PORT,
+    database: process.env.POSTGRES_DB
   });
-} else {
-  pool = new Pool({
-    user: 'postgres',
-    password: 'postgres',
-    host: 'db',
-    port: 5432,
-    database: 'db_samehere'
-  });
-}
 
 console.log('pool', JSON.stringify(pool, null, 2))
 
