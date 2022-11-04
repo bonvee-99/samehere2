@@ -14,6 +14,9 @@ if (process.env.NODE_ENV === "production") {
 // ----- ROUTES ----- //
 
 // register/login route:
+app.get("/healthcheck", async (req, res) => {
+  res.send("running")
+})
 
 app.use("/auth", require("./routes/jwtAuth"));
 

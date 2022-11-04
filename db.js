@@ -12,12 +12,14 @@ if (process.env.NODE_ENV === "production") {
   });
 } else {
   pool = new Pool({
-    user: process.env.PG_USER,
-    password: process.env.PG_USER,
-    host: process.env.PG_HOST,
-    port: process.env.PG_PORT,
-    database: process.env.PG_DATABASE,
+    user: 'postgres',
+    password: 'postgres',
+    host: 'db',
+    port: 5432,
+    database: 'db_samehere'
   });
 }
+
+console.log('pool', JSON.stringify(pool, null, 2))
 
 module.exports = pool;

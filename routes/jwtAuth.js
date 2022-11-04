@@ -2,10 +2,10 @@ const router = require("express").Router();
 const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const {
-  jwtGenerator,
-  jwtEmailGenerator,
-} = require("../utilities/jwtGenerator");
+// const {
+//   jwtGenerator,
+//   jwtEmailGenerator,
+// } = require("../utilities/jwtGenerator");
 
 // -----> Authentication/Authorization -----> //
 
@@ -16,6 +16,7 @@ const { validateInfo, validateEmail } = require("../middleware/validateInfo");
 router.post("/register", validateInfo, async (req, res) => {
   try {
     const { name, email, password } = req.body;
+    console.log(req.body)
 
     // checking if users exists
     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
@@ -37,10 +38,10 @@ router.post("/register", validateInfo, async (req, res) => {
       [name, email, bcryptPassword]
     );
 
-    await jwtEmailGenerator(
-      newUser.rows[0].user_id,
-      newUser.rows[0].user_email
-    );
+    // await jwtEmailGenerator(
+    //   newUser.rows[0].user_id,
+    //   newUser.rows[0].user_email
+    // );
     res.json(true);
   } catch (error) {
     console.error(error.message);
@@ -49,48 +50,48 @@ router.post("/register", validateInfo, async (req, res) => {
 });
 
 // email verification
-router.get("/confirmation/:token", async (req, res) => {
-  try {
-    const { token } = req.params;
-    const payload = jwt.verify(token, process.env.emailSecret);
-    const id = payload.user.id;
-    const confirmUser = await pool.query(
-      "UPDATE users SET confirmed = true WHERE user_id = $1",
-      [id]
-    );
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).json("Server Error!");
-  }
-  if (process.env.NODE_ENV === "production") {
-    url = `https://same-here.herokuapp.com/`;
-  } else {
-    url = `http://localhost:3000/`;
-  }
-  res.redirect(url);
-});
+// router.get("/confirmation/:token", async (req, res) => {
+//   try {
+//     const { token } = req.params;
+//     const payload = jwt.verify(token, process.env.emailSecret);
+//     const id = payload.user.id;
+//     const confirmUser = await pool.query(
+//       "UPDATE users SET confirmed = true WHERE user_id = $1",
+//       [id]
+//     );
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).json("Server Error!");
+//   }
+//   if (process.env.NODE_ENV === "production") {
+//     url = `https://same-here.herokuapp.com/`;
+//   } else {
+//     url = `http://localhost:3000/`;
+//   }
+//   res.redirect(url);
+// });
 
 // sends user of given email a new jwt token
-router.post("/confirmation", validateEmail, async (req, res) => {
-  try {
-    const { email } = req.body;
-    const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
-      email,
-    ]);
+// router.post("/confirmation", validateEmail, async (req, res) => {
+//   try {
+//     const { email } = req.body;
+//     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
+//       email,
+//     ]);
 
-    if (user.rows.length === 0) {
-      return res.status(401).json("Email does not exist!");
-    }
+//     if (user.rows.length === 0) {
+//       return res.status(401).json("Email does not exist!");
+//     }
 
-    // send new link
-    await jwtEmailGenerator(user.rows[0].user_id, user.rows[0].user_email);
+//     // send new link
+//     await jwtEmailGenerator(user.rows[0].user_id, user.rows[0].user_email);
 
-    res.json(true);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).json("Server Errror!");
-  }
-});
+//     res.json(true);
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).json("Server Errror!");
+//   }
+// });
 
 // login and returns jwt token
 router.post("/login", validateInfo, async (req, res) => {
@@ -118,9 +119,9 @@ router.post("/login", validateInfo, async (req, res) => {
       return res.status(401).json("Password or email is incorrect!");
     }
 
-    if (!user.rows[0].confirmed) {
-      return res.status(401).json("Please confirm email!");
-    }
+    // if (!user.rows[0].confirmed) {
+    //   return res.status(401).json("Please confirm email!");
+    // }
     // if they did confirm email
     const token = jwtGenerator(user.rows[0].user_id);
 
